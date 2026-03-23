@@ -25,8 +25,7 @@ export default function TutorialPage() {
   }
 
   return (
-    <WindowFrame>
-      <MainTitleBar title="Tauri Tutorial - Calculator" />
+    <WindowFrame titleBar={<MainTitleBar/>}>
       <div className="flex h-full items-center justify-center p-8">
         <Card className="w-full max-w-md">
           <CardHeader>
