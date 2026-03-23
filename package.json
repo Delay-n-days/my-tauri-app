@@ -10,12 +10,12 @@
     "release:version": "node scripts/release-version.mjs",
     "tauri": "tauri",
     "tauri:dev": "tauri dev",
-    "tauri:build": "tauri build --bundles nsis",
+    "tauri:build": "tauri build --bundles nsis,updater",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,json}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,css,json}\"",
     "lint": "eslint src/**/*.{ts,tsx} vite.config.ts",
     "lint:fix": "eslint src/**/*.{ts,tsx} vite.config.ts --fix",
-    "check": "pnpm format:check && pnpm lint && pnpm build"
+    "check": "bun format:check && bun lint && bun build"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.1",

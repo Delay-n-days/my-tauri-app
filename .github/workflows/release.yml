@@ -20,7 +20,7 @@ jobs:
 #          - platform: 'ubuntu-22.04'
 #            args: ''
           - platform: 'windows-latest'
-            args: '--bundles nsis,updater'
+            args: ''
 
     runs-on: ${{ matrix.platform }}
     steps:
@@ -77,4 +77,3 @@ jobs:
           releaseDraft: false
           prerelease: false
           args: ${{ matrix.args }}
-          tauriScript: bun
