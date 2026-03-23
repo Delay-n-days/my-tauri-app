@@ -25,3 +25,7 @@ dist-ssr
 
 # Claude AI
 .claude/
+
+# Tauri signing keys (keep private keys secret!)
+.tauri/*.key
+!.tauri/*.key.pub
