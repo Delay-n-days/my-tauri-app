@@ -2,73 +2,73 @@
 
 # Tauri App Template
 
-English | [简体中文](./README.zh-CN.md)
+简体中文
 
 [![Tauri](https://img.shields.io/badge/Tauri-2.0-24C8DB?logo=tauri)](https://tauri.app/)
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?logo=typescript)](https://www.typescriptlang.org/)
 [![License](https://img.shields.io/badge/License-MIT-green)](./LICENSE)
 
-A modern desktop application template built with Tauri v2 + React 19 + TypeScript + shadcn/ui.
+基于 Tauri v2 + React 19 + TypeScript + shadcn/ui 的桌面应用模板。
 
 </div>
 
-## Preview
+## 预览
 
-![App Screenshot](./screenshots/app.png)
+![应用截图](./screenshots/app.png)
 
-## Features
+## 特点
 
-- ✨ **Modern Tech Stack** - Tauri v2 + React 19 + TypeScript + Vite
-- 🎨 **Beautiful UI Components** - Integrated shadcn/ui component library and Tailwind CSS v4
-- 🌓 **Dark Mode Support** - Built-in light/dark theme toggle
-- 🌍 **Internationalization** - i18next integration with English and Chinese support
-- 🖼️ **Custom Titlebar** - Frameless transparent window with drag, minimize, maximize, and close support
-- 🗂️ **Multi-Window Management** - Support for child windows, window lifecycle management, and delayed destruction
-- 🔔 **System Tray Integration** - Tray icon, menu, and window show/hide support
-- ⌨️ **Global Shortcuts** - Register global shortcuts that work even when app is not focused
-- 🔄 **Automated Release & Updates** - GitHub Actions build, GitHub Release publishing, and auto-update delivery based on `vX.Y.Z` tags
-- 📦 **Ready to Use** - Pre-configured with Prettier, ESLint, and TypeScript strict mode
-- 🚀 **Fast Development** - Vite HMR + Tauri hot reload
+- ✨ **现代化技术栈** - Tauri v2 + React 19 + TypeScript + Vite
+- 🎨 **精美 UI 组件** - 集成 shadcn/ui 组件库和 Tailwind CSS v4
+- 🌓 **暗色模式支持** - 内置亮色/暗色主题切换
+- 🌍 **国际化支持** - 集成 i18next，支持中英文切换
+- 🖼️ **自定义标题栏** - 无边框透明窗口，支持拖拽、最小化、最大化、关闭
+- 🗂️ **多窗口管理** - 支持创建子窗口、窗口生命周期管理、延迟销毁机制
+- 🔔 **系统托盘集成** - 支持托盘图标、菜单和窗口隐藏/显示
+- ⌨️ **全局快捷键** - 支持注册全局快捷键，应用未聚焦时也能响应
+- 🔄 **自动发布与更新** - 支持基于 `vX.Y.Z` 标签的 GitHub Actions 自动构建、Release 发布与自动更新
+- 📦 **开箱即用** - 预配置 Prettier、ESLint 和 TypeScript 严格模式
+- 🚀 **快速开发** - Vite HMR + Tauri 热重载
 
-## Tech Stack
+## 技术栈
 
-- **Desktop Framework**: [Tauri v2](https://tauri.app/)
-- **Frontend Framework**: [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
-- **Build Tool**: [Vite](https://vite.dev/)
-- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Code Formatting**: [Prettier](https://prettier.io/)
+- **桌面框架**: [Tauri v2](https://tauri.app/)
+- **前端框架**: [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- **构建工具**: [Vite](https://vite.dev/)
+- **UI 组件**: [shadcn/ui](https://ui.shadcn.com/)
+- **样式方案**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **代码格式化**: [Prettier](https://prettier.io/)
 
-## Getting Started
+## 开始使用
 
-### Prerequisites
+### 环境要求
 
 - Node.js >= 18
 - bun >= 1.0
 - Rust >= 1.70
 
-### Install Dependencies
+### 安装依赖
 
 ```bash
 bun install
 ```
 
-### Development Mode
+### 开发模式
 
 ```bash
 bun tauri dev
 ```
 
-### Build for Production
+### 构建发布
 
 ```bash
 bun tauri build
 ```
 
-### Version Management
+### 版本管理
 
-`bun release:version` is the release entrypoint.
+`bun release:version` 是版本发布的唯一入口。
 
 ```bash
 bun release:version
@@ -76,22 +76,22 @@ bun release:version --lang zh
 bun release:version --lang en
 ```
 
-It interactively handles the release preflight and version bump flow:
-- Ensures the working tree is clean
-- Requires the current branch to be `main`
-- Verifies `package.json`, `src-tauri/tauri.conf.json`, and `src-tauri/Cargo.toml` are in sync
-- Checks that the target tag does not already exist locally or on `origin`
-- Updates all three version files together
-- Creates the release commit and `vX.Y.Z` tag
-- Optionally pushes the branch and tag
+它会交互式完成发布前检查和版本更新流程：
+- 确保工作区干净
+- 强制要求当前分支为 `main`
+- 校验 `package.json`、`src-tauri/tauri.conf.json` 和 `src-tauri/Cargo.toml` 的版本一致
+- 检查目标 tag 是否已在本地或远端 `origin` 存在
+- 同步更新这三个版本文件
+- 创建发布提交和 `vX.Y.Z` tag
+- 可选地推送分支和 tag
 
-## Adding shadcn/ui Components
+## 添加 shadcn/ui 组件
 
 ```bash
 bunx shadcn@latest add <component-name>
 ```
 
-Examples:
+示例：
 
 ```bash
 bunx shadcn@latest add button
@@ -99,94 +99,94 @@ bunx shadcn@latest add input
 bunx shadcn@latest add dialog
 ```
 
-## Code Formatting
+## 代码格式化
 
 ```bash
-bun format        # Format code
-bun format:check  # Check code formatting
+bun format        # 格式化代码
+bun format:check  # 检查代码格式
 ```
 
-## Project Structure
+## 项目结构
 
 ```
 .
-├── src/                    # Frontend source code
-│   ├── components/         # React components
-│   │   └── ui/            # shadcn/ui components
-│   ├── i18n/              # Internationalization
-│   │   ├── index.ts       # i18n configuration
-│   │   └── locales/       # Translation files
-│   ├── lib/               # Utility functions
-│   ├── pages/             # Page components
-│   │   ├── home.tsx       # Main window page
-│   │   ├── about.tsx      # About window page
-│   │   └── settings.tsx   # Settings window page
-│   └── main.tsx           # Frontend entry and pathname-based page selector
-├── src-tauri/             # Tauri/Rust backend
-│   ├── src/               # Rust source code
-│   └── tauri.conf.json    # Tauri configuration
-├── docs/                  # Documentation
-│   ├── AUTO_UPDATE.md     # Auto update guide
-│   ├── I18N.md            # Internationalization guide
-│   └── GLOBAL_SHORTCUT.md # Global shortcut guide
-├── components.json        # shadcn/ui configuration
+├── src/                    # 前端源码
+│   ├── components/         # React 组件
+│   │   └── ui/            # shadcn/ui 组件
+│   ├── i18n/              # 国际化
+│   │   ├── index.ts       # i18n 配置
+│   │   └── locales/       # 翻译文件
+│   ├── lib/               # 工具函数
+│   ├── pages/             # 页面组件
+│   │   ├── home.tsx       # 主窗口页面
+│   │   ├── about.tsx      # 关于窗口页面
+│   │   └── settings.tsx   # 设置窗口页面
+│   └── main.tsx           # 前端入口和基于 pathname 的页面选择器
+├── src-tauri/             # Tauri/Rust 后端
+│   ├── src/               # Rust 源码
+│   └── tauri.conf.json    # Tauri 配置
+├── docs/                  # 文档
+│   ├── AUTO_UPDATE.md     # 自动更新指南
+│   ├── I18N.md            # 国际化指南
+│   └── GLOBAL_SHORTCUT.md # 全局快捷键指南
+├── components.json        # shadcn/ui 配置
 └── package.json
 ```
 
 ## CI/CD
 
-This project uses GitHub Actions for automated builds and releases.
+本项目使用 GitHub Actions 实现自动化构建和发布。
 
-### Automated Release
+### 自动化发布
 
-The workflow is triggered by pushing tags matching `v*` (for example `v0.1.0`).
-The recommended release path is to run `bun release:version`, which creates the matching `vX.Y.Z` tag for you.
+工作流会在推送符合 `v*` 格式的标签时触发，例如 `v0.1.0`。
+推荐通过 `bun release:version` 发版，它会自动创建匹配的 `vX.Y.Z` tag。
 
-**Manual tag push example:**
+**手动创建并推送标签示例：**
 ```bash
 git tag v0.1.0
 git push origin v0.1.0
 ```
 
-### Build Outputs
+### 构建产物
 
-The workflow generates:
-- **NSIS Installer** - Windows installation package
-- **Updater Files** - `latest.json` for auto-update support
+工作流会生成：
+- **NSIS 安装包** - Windows 安装程序
+- **更新文件** - `latest.json` 用于自动更新支持
 
-### Auto Update Setup
+### 自动更新配置
 
-To enable automatic updates, you need to:
+要启用自动更新功能，需要：
 
-1. Generate signing keys: `bun tauri signer generate -w ~/.tauri/myapp.key`
-2. Add GitHub secrets: `TAURI_SIGNING_PRIVATE_KEY` and `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`
+1. 生成签名密钥：`bun tauri signer generate -w ~/.tauri/myapp.key`
+2. 添加 GitHub Secrets：`TAURI_SIGNING_PRIVATE_KEY` 和 `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`
 
-**Note:** The public key and update endpoint placeholders in `src-tauri/tauri.conf.json` are replaced by GitHub Actions during the release build. Auto update depends on the published GitHub Release exposing `latest.json` from the latest release assets.
+**注意：** `src-tauri/tauri.conf.json` 中的公钥和更新端点占位符会在发布构建期间由 GitHub Actions 自动替换。自动更新依赖已发布的 GitHub Release 对外提供最新版本的 `latest.json` 资源。
 
-See [Auto Update Configuration](./docs/AUTO_UPDATE.md) for detailed instructions.
+详细配置说明请查看 [自动更新配置文档](./docs/AUTO_UPDATE.md)。
 
-### Code Signing (Optional)
+### 代码签名（可选）
 
-To enable code signing, add these secrets in your GitHub repository settings:
-- `TAURI_SIGNING_PRIVATE_KEY` - Private key content
-- `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` - Private key password
+如需启用代码签名，在 GitHub 仓库设置中添加以下 Secrets：
+- `TAURI_SIGNING_PRIVATE_KEY` - 私钥内容
+- `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` - 私钥密码
 
-The build will work without these secrets, but the installer won't be signed.
+不配置这些 Secrets 也能正常构建，只是安装包不会被签名。
 
-### Multi-Platform Support
+### 多平台支持
 
-To enable macOS and Linux builds, uncomment the corresponding platform configurations in `.github/workflows/release.yml`.
+如需启用 macOS 和 Linux 构建，取消 `.github/workflows/release.yml` 中对应平台配置的注释即可。
 
-## Recommended IDE Setup
+## IDE 推荐
 
 - [VS Code](https://code.visualstudio.com/)
 - [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode)
 - [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
 
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=kitlib/tauri-app-template&type=Date)](https://star-history.com/#kitlib/tauri-app-template&Date)
-
 ## License
 
 MIT
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=kitlib/tauri-app-template&type=Date)](https://star-history.com/#kitlib/tauri-app-template&Date)

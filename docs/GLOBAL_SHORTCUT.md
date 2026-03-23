@@ -1,44 +1,44 @@
-# Global Shortcut Development Guide
+# 全局快捷键开发指南
 
-This guide explains how to implement global shortcuts in Tauri v2 applications using the `tauri-plugin-global-shortcut` plugin.
+本指南介绍如何在 Tauri v2 应用中使用 `tauri-plugin-global-shortcut` 插件实现全局快捷键功能。
 
-## Overview
+## 概述
 
-Global shortcuts allow your application to respond to keyboard combinations even when the app is not focused. This template provides a complete implementation with:
+全局快捷键允许应用在未获得焦点时也能响应键盘组合键。本模板提供了完整的实现方案：
 
-- Keyboard event capture and conversion
-- Shortcut registration/unregistration
-- UI component for shortcut input
-- Permission configuration
+- 键盘事件捕获与转换
+- 快捷键注册/注销
+- 快捷键输入 UI 组件
+- 权限配置
 
-## Setup
+## 配置步骤
 
-### 1. Install Plugin
+### 1. 安装插件
 
-Add to `src-tauri/Cargo.toml`:
+在 `src-tauri/Cargo.toml` 中添加：
 
 ```toml
 [dependencies]
 tauri-plugin-global-shortcut = "2"
 ```
 
-### 2. Initialize Plugin
+### 2. 初始化插件
 
-In `src-tauri/src/lib.rs`:
+在 `src-tauri/src/lib.rs` 中：
 
 ```rust
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_global_shortcut::init())
-        // ... other plugins
+        // ... 其他插件
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
 ```
 
-### 3. Configure Permissions
+### 3. 配置权限
 
-Add to `src-tauri/capabilities/default.json`:
+在 `src-tauri/capabilities/default.json` 中添加：
 
 ```json
 {
@@ -53,63 +53,63 @@ Add to `src-tauri/capabilities/default.json`:
 }
 ```
 
-### 4. Install Frontend Package
+### 4. 安装前端依赖
 
 ```bash
 bun add @tauri-apps/plugin-global-shortcut
 ```
 
-## Implementation
+## 实现方式
 
-### Utility Functions (`src/lib/shortcut.ts`)
+### 工具函数 (`src/lib/shortcut.ts`)
 
-#### Convert Keyboard Event to Shortcut String
+#### 转换键盘事件为快捷键字符串
 
 ```typescript
 import { convertToShortcut } from "@/lib/shortcut";
 
-// Example: Ctrl+Shift+A
+// 示例：Ctrl+Shift+A
 const shortcut = convertToShortcut(keyboardEvent);
 ```
 
-**Supported Modifiers:**
+**支持的修饰键：**
 - `Ctrl` / `Cmd` (macOS)
 - `Alt`
 - `Shift`
 
-**Special Keys:**
-- `Space`, `Enter`, `Esc`
-- Arrow keys: `Up`, `Down`, `Left`, `Right`
-- Single characters: automatically uppercase
+**特殊按键：**
+- `Space`、`Enter`、`Esc`
+- 方向键：`Up`、`Down`、`Left`、`Right`
+- 单字符：自动转为大写
 
-#### Register Shortcut
+#### 注册快捷键
 
 ```typescript
 import { registerShortcut } from "@/lib/shortcut";
 
 await registerShortcut("Ctrl+Shift+A", () => {
-  console.log("Shortcut triggered!");
+  console.log("快捷键触发！");
 });
 
-// Replace existing shortcut
+// 替换已有快捷键
 await registerShortcut("Ctrl+Shift+B", callback, "Ctrl+Shift+A");
 ```
 
-#### Unregister Shortcut
+#### 注销快捷键
 
 ```typescript
 import { unregisterShortcut, unregisterAllShortcut } from "@/lib/shortcut";
 
-// Unregister specific shortcut
+// 注销指定快捷键
 await unregisterShortcut("Ctrl+Shift+A");
 
-// Unregister all shortcuts
+// 注销所有快捷键
 await unregisterAllShortcut();
 ```
 
-### UI Component (`src/components/shortcut-input.tsx`)
+### UI 组件 (`src/components/shortcut-input.tsx`)
 
-Pre-built component for capturing keyboard shortcuts:
+预构建的快捷键输入组件：
 
 ```typescript
 import { ShortcutInput } from "@/components/shortcut-input";
@@ -126,13 +126,13 @@ function Settings() {
 }
 ```
 
-**Features:**
-- Click to focus and capture keyboard input
-- Press `Backspace` or `Delete` to clear
-- Visual feedback with clear button
-- i18n support for placeholder text
+**功能特性：**
+- 点击聚焦并捕获键盘输入
+- 按 `Backspace` 或 `Delete` 清除
+- 带清除按钮的视觉反馈
+- 支持国际化占位符文本
 
-## Complete Example
+## 完整示例
 
 ```typescript
 import { useEffect, useState } from "react";
@@ -144,7 +144,7 @@ function Settings() {
   const [shortcut, setShortcut] = useState("Ctrl+Shift+A");
 
   useEffect(() => {
-    // Register shortcut to show window
+    // 注册快捷键以显示窗口
     const setupShortcut = async () => {
       await registerShortcut(shortcut, async () => {
         const window = getCurrentWindow();
@@ -155,7 +155,7 @@ function Settings() {
 
     setupShortcut();
 
-    // Cleanup on unmount
+    // 组件卸载时清理
     return () => {
       unregisterShortcut(shortcut);
     };
@@ -163,66 +163,66 @@ function Settings() {
 
   return (
     <div>
-      <label>Global Shortcut:</label>
+      <label>全局快捷键：</label>
       <ShortcutInput value={shortcut} onChange={setShortcut} />
     </div>
   );
 }
 ```
 
-## Best Practices
+## 最佳实践
 
-1. **Always Unregister**: Clean up shortcuts when component unmounts or shortcut changes
-2. **Validate Input**: Ensure shortcuts include at least one modifier key
-3. **Avoid Conflicts**: Check if shortcut is already registered before registering
-4. **User Feedback**: Show toast notifications when shortcuts are set/changed
-5. **Persistence**: Save user-defined shortcuts to local storage or settings file
+1. **始终注销**：组件卸载或快捷键变更时清理注册
+2. **验证输入**：确保快捷键至少包含一个修饰键
+3. **避免冲突**：注册前检查快捷键是否已被占用
+4. **用户反馈**：设置/更改快捷键时显示提示消息
+5. **持久化**：将用户自定义快捷键保存到本地存储或配置文件
 
-## Troubleshooting
+## 故障排查
 
-### Shortcut Not Working
+### 快捷键无效
 
-- Check if shortcut is already registered by system or another app
-- Verify permissions in `capabilities/default.json`
-- Ensure plugin is initialized in `src-tauri/src/lib.rs`
+- 检查快捷键是否已被系统或其他应用占用
+- 验证 `capabilities/default.json` 中的权限配置
+- 确保插件已在 `src-tauri/src/lib.rs` 中初始化
 
-### Shortcut Conflicts
+### 快捷键冲突
 
 ```typescript
 import { isRegistered } from "@tauri-apps/plugin-global-shortcut";
 
 const registered = await isRegistered("Ctrl+Shift+A");
 if (registered) {
-  console.warn("Shortcut already registered");
+  console.warn("快捷键已被注册");
 }
 ```
 
-## API Reference
+## API 参考
 
 ### `convertToShortcut(event: KeyboardEvent): string`
 
-Converts browser KeyboardEvent to Tauri shortcut format.
+将浏览器 KeyboardEvent 转换为 Tauri 快捷键格式。
 
-**Returns:** Shortcut string (e.g., "Ctrl+Shift+A") or empty string if invalid
+**返回值：** 快捷键字符串（如 "Ctrl+Shift+A"）或空字符串（无效输入）
 
 ### `registerShortcut(shortcut: string, callback: () => void, oldShortcut?: string): Promise<void>`
 
-Registers a global shortcut with callback function.
+注册全局快捷键及回调函数。
 
-**Parameters:**
-- `shortcut`: Shortcut string to register
-- `callback`: Function to execute when shortcut is pressed
-- `oldShortcut`: Optional previous shortcut to unregister
+**参数：**
+- `shortcut`：要注册的快捷键字符串
+- `callback`：快捷键按下时执行的函数
+- `oldShortcut`：可选的旧快捷键，用于注销
 
 ### `unregisterShortcut(shortcut?: string): Promise<void>`
 
-Unregisters a specific shortcut.
+注销指定快捷键。
 
 ### `unregisterAllShortcut(): Promise<void>`
 
-Unregisters all shortcuts registered by the application.
+注销应用注册的所有快捷键。
 
-## Related Documentation
+## 相关文档
 
-- [Tauri Global Shortcut Plugin](https://v2.tauri.app/plugin/global-shortcut/)
-- [Keyboard Event Reference](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent)
+- [Tauri 全局快捷键插件](https://v2.tauri.app/plugin/global-shortcut/)
+- [键盘事件参考](https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent)
