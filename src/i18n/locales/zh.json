@@ -72,6 +72,34 @@
       "cleared": "已取消快捷键！"
     }
   },
+  "can": {
+    "title": "CAN 工具",
+    "deviceConfig": "设备配置",
+    "channel": "通道",
+    "baudrate": "波特率",
+    "open": "打开",
+    "close": "关闭",
+    "status": "状态",
+    "connected": "已连接",
+    "disconnected": "未连接",
+    "sendMessage": "发送消息",
+    "canId": "CAN ID",
+    "data": "数据 (8 字节)",
+    "send": "发送",
+    "receiveMessages": "接收报文",
+    "startReceiving": "开始自动接收",
+    "stopReceiving": "停止自动接收",
+    "clear": "清空",
+    "noMessages": "无接收报文",
+    "initSuccess": "CAN 初始化成功",
+    "initFailed": "CAN 初始化失败：{{error}}",
+    "closeSuccess": "CAN 关闭成功",
+    "closeFailed": "CAN 关闭失败：{{error}}",
+    "sendSuccess": "报文发送成功",
+    "sendFailed": "发送失败：{{error}}",
+    "dataMustBe8Bytes": "数据必须为 8 字节",
+    "invalidByteValue": "字节值无效（必须为 0-255）"
+  },
   "releaseVersion": {
     "options": {
       "patch": "补丁版本",

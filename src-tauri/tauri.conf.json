@@ -46,6 +46,9 @@
       "nsis"
     ],
     "createUpdaterArtifacts": true,
+    "resources": [
+      "ControlCAN.dll"
+    ],
     "windows": {
       "nsis": {
         "installerIcon": "icons/icon.ico",

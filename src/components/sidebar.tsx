@@ -1,4 +1,4 @@
-import { Home, BookOpen, FileCode } from "lucide-react";
+import { Home, BookOpen, FileCode, Gauge } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface SidebarProps {
@@ -22,6 +22,11 @@ export function Sidebar({ currentPath, onNavigate }: SidebarProps) {
       label: "Code Editor",
       path: "/editor",
       icon: FileCode,
+    },
+    {
+      label: "CAN Tool",
+      path: "/can-tool",
+      icon: Gauge,
     },
   ];
 

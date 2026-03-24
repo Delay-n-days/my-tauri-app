@@ -12,11 +12,13 @@ const AboutPage = lazy(() => import("./pages/about"));
 const SettingsPage = lazy(() => import("./pages/settings"));
 const TutorialPage = lazy(() => import("./pages/tutorial"));
 const EditorPage = lazy(() => import("./pages/editor"));
+const CanToolPage = lazy(() => import("./pages/can-tool"));
 
 function AppWrapper() {
   const [currentPage, setCurrentPage] = useState<string>(
     window.location.pathname === "/editor" ? "/editor" :
-    window.location.pathname === "/tutorial" ? "/tutorial" : "/"
+    window.location.pathname === "/tutorial" ? "/tutorial" :
+    window.location.pathname === "/can-tool" ? "/can-tool" : "/"
   );
 
   useEffect(() => {
@@ -45,6 +47,8 @@ function AppWrapper() {
         return <TutorialPage />;
       case "/editor":
         return <EditorPage />;
+      case "/can-tool":
+        return <CanToolPage />;
       default:
         return <HomePage />;
     }

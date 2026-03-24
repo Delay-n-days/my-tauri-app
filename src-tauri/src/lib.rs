@@ -1,6 +1,9 @@
 mod plugins;
+mod can;
 
-use tauri::Manager;
+use std::sync::Mutex;
+use tauri::{Manager, State};
+use can::{CanDriver, CanMessage};
 
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 #[tauri::command]
@@ -19,9 +22,54 @@ fn update_tray_menu(app: tauri::AppHandle, show_text: String, quit_text: String)
     plugins::system_tray::update_tray_menu(&app, &show_text, &quit_text)
 }
 
+// CAN driver state
+struct CanState {
+    driver: Mutex<Option<CanDriver>>,
+}
+
+// CAN commands
+#[tauri::command]
+async fn can_init(channel: u32, baudrate: u32, state: State<'_, CanState>) -> Result<String, String> {
+    let mut driver = CanDriver::new(0); // 0 for standard frame
+    driver.open(channel)?;
+    driver.init(baudrate)?;
+
+    let mut can_state = state.driver.lock().unwrap();
+    *can_state = Some(driver);
+
+    Ok(format!("CAN initialized: channel={}, baudrate={}K", channel, baudrate))
+}
+
+#[tauri::command]
+async fn can_send(id: u32, data: Vec<u8>, state: State<'_, CanState>) -> Result<String, String> {
+    let can_state = state.driver.lock().unwrap();
+    let driver = can_state.as_ref().ok_or("CAN not initialized")?;
+    driver.send(id, &data)?;
+    Ok(format!("Sent: ID=0x{:X}, Data={:?}", id, data))
+}
+
+#[tauri::command]
+async fn can_receive(timeout_ms: i32, state: State<'_, CanState>) -> Result<Vec<CanMessage>, String> {
+    let can_state = state.driver.lock().unwrap();
+    let driver = can_state.as_ref().ok_or("CAN not initialized")?;
+    driver.receive(timeout_ms)
+}
+
+#[tauri::command]
+async fn can_close(state: State<'_, CanState>) -> Result<String, String> {
+    let mut can_state = state.driver.lock().unwrap();
+    if let Some(mut driver) = can_state.take() {
+        driver.close()?;
+        Ok("CAN closed".to_string())
+    } else {
+        Err("CAN not initialized".to_string())
+    }
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     let mut builder = tauri::Builder::default()
+        .manage(CanState { driver: Mutex::new(None) })
         .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
             // When attempting to start a second instance, focus the existing main window
             if let Some(window) = app.get_webview_window("main") {
@@ -35,7 +83,15 @@ pub fn run() {
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_fs::init())
         .plugin(plugins::system_tray::init())
-        .invoke_handler(tauri::generate_handler![greet, add_numbers, update_tray_menu])
+        .invoke_handler(tauri::generate_handler![
+            greet,
+            add_numbers,
+            update_tray_menu,
+            can_init,
+            can_send,
+            can_receive,
+            can_close
+        ])
         .setup(|app| {
             // Apply shadow to main window on Windows
             #[cfg(target_os = "windows")]

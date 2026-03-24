@@ -72,6 +72,34 @@
       "cleared": "Shortcut cleared!"
     }
   },
+  "can": {
+    "title": "CAN Tool",
+    "deviceConfig": "Device Configuration",
+    "channel": "Channel",
+    "baudrate": "Baudrate",
+    "open": "Open",
+    "close": "Close",
+    "status": "Status",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "sendMessage": "Send Message",
+    "canId": "CAN ID",
+    "data": "Data (8 bytes)",
+    "send": "Send",
+    "receiveMessages": "Receive Messages",
+    "startReceiving": "Start Auto-Receive",
+    "stopReceiving": "Stop Auto-Receive",
+    "clear": "Clear",
+    "noMessages": "No messages received",
+    "initSuccess": "CAN initialized successfully",
+    "initFailed": "CAN initialization failed: {{error}}",
+    "closeSuccess": "CAN closed successfully",
+    "closeFailed": "CAN close failed: {{error}}",
+    "sendSuccess": "Message sent successfully",
+    "sendFailed": "Send failed: {{error}}",
+    "dataMustBe8Bytes": "Data must be 8 bytes",
+    "invalidByteValue": "Invalid byte value (must be 0-255)"
+  },
   "releaseVersion": {
     "options": {
       "patch": "Patch",

@@ -33,4 +33,5 @@ tauri-plugin-updater = "2"
 
 [target.'cfg(target_os = "windows")'.dependencies]
 windows = { version = "0.58", features = ["Win32_Graphics_Dwm", "Win32_Foundation"] }
+libloading = "0.8"
 
