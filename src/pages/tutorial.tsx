@@ -3,8 +3,6 @@ import { invoke } from "@tauri-apps/api/core";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { WindowFrame } from "@/components/window-frame";
-import { MainTitleBar } from "@/components/main-title-bar";
 
 export default function TutorialPage() {
   const [num1, setNum1] = useState<string>("");
@@ -25,9 +23,8 @@ export default function TutorialPage() {
   }
 
   return (
-    <WindowFrame titleBar={<MainTitleBar/>}>
-      <div className="flex h-full items-center justify-center p-8">
-        <Card className="w-full max-w-md">
+    <div className="flex h-full items-center justify-center p-8">
+      <Card className="w-full max-w-md">
           <CardHeader>
             <CardTitle>Simple Calculator</CardTitle>
             <CardDescription>
@@ -77,6 +74,5 @@ export default function TutorialPage() {
           </CardContent>
         </Card>
       </div>
-    </WindowFrame>
   );
 }

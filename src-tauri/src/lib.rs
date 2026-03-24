@@ -21,7 +21,7 @@ fn update_tray_menu(app: tauri::AppHandle, show_text: String, quit_text: String)
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    let builder = tauri::Builder::default()
+    let mut builder = tauri::Builder::default()
         .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
             // When attempting to start a second instance, focus the existing main window
             if let Some(window) = app.get_webview_window("main") {
@@ -32,6 +32,8 @@ pub fn run() {
         }))
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_global_shortcut::Builder::new().build())
+        .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_fs::init())
         .plugin(plugins::system_tray::init())
         .invoke_handler(tauri::generate_handler![greet, add_numbers, update_tray_menu])
         .setup(|app| {
@@ -45,6 +47,12 @@ pub fn run() {
             }
             Ok(())
         });
+
+    // Enable MCP Bridge in development mode
+    #[cfg(debug_assertions)]
+    {
+        builder = builder.plugin(tauri_plugin_mcp_bridge::init());
+    }
 
     // Only enable updater in release mode
     #[cfg(not(debug_assertions))]
